@@ -8,6 +8,8 @@ import axios from 'axios';
 
 const InfoPage = () => {
   const [resData, setResData] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
   const getFun = () => {
     axios
       .get("/api/shelf")
@@ -16,9 +18,31 @@ const InfoPage = () => {
       }
       );
   }
+  const handleChangeForDes = (e) => {
+    setDescription(e.target.value);
+  };
+  const handleChangeForImg = (e) => {
+    setImageURL(e.target.value);
+  };
+  const submitFun = () => {
+    axios.post('/api/shelf', {description, imageURL}).then(()=>{console.log(`adding new item to server`)}).catch((error)=>{console.log(error)});
+  }
   return (
     <div>
       <p>Shelf Page</p>
+      <form onSubmit={submitFun}>
+        <input
+          type="text"
+          placeholder="Description"
+          onChange={handleChangeForDes}
+        />
+        <input
+          type="text"
+          placeholder="Image URL"
+          onChange={handleChangeForImg}
+        />
+        <input type="submit" value="Add Item" onSubmit={submitFun} />
+      </form>
       <button onClick={getFun}>Click</button>
       <div>
         {resData !== null ? (
@@ -26,7 +50,8 @@ const InfoPage = () => {
             {resData.map((item, index) => (
               <div key={index}>
                 <h1>{item.description}</h1>
-                <img src={item.image_url} height='300' width='350'/>
+                <img src={item.image_url} height="300" width="350" />
+                <button onClick={()=>axios.delete(`/api/shelf/${item.id}`)}>Delete</button>
               </div>
             ))}
           </div>
@@ -34,7 +59,7 @@ const InfoPage = () => {
           <p>?</p>
         )}
       </div>
-    </div> 
+    </div>
   );
 }
 export default InfoPage;

@@ -32,7 +32,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   console.log(item);
   
   const queryText = `INSERT INTO item (description, image_url, user_id) VALUES ($1, $2, $3)`;
-  const queryThing = [item.description, item.image_url, user.id];
+  const queryThing = [item.description, item.imageURL, user.id];
   console.log(queryThing);
   
   pool
@@ -62,7 +62,8 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
             if (item.user_id !== req.user.id) {
                 res.sendStatus(418).send('You cant remove someone elses item.');
                 return;
-            } else {
+            }
+            else {
                 // its their item! allow them delete it
                 const queryText2 = `DELETE FROM item WHERE id=$1`;
                 pool.query(queryText2, [item.id])
