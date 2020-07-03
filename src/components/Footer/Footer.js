@@ -8,7 +8,18 @@ import './Footer.css'
 
 const Footer = () => (
   <footer>
-    &copy; Prime Digital Academy
+    <div class="nes-container with-title is-centered">
+      <section class="icon-list">
+        <i class="nes-ash"></i>
+        <i class="nes-pokeball"></i>
+        <i class="nes-bulbasaur"></i>
+        <i class="nes-charmander"></i>
+        <i class="nes-squirtle"></i>
+        <i class="nes-kirby"></i>
+        <i class="nes-octocat animate"></i>
+      </section>
+      &copy; Really cool website
+    </div>
   </footer>
 );
 
