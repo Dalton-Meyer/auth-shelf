@@ -37,7 +37,6 @@ const InfoPage = () => {
   }
   return (
     <div>
-      
       <form onSubmit={submitFun} class="nes-container with-title is-centered">
         <input
           type="text"
@@ -67,21 +66,21 @@ const InfoPage = () => {
           {resData !== null ? (
             <div>
               {resData.map((item, index) => (
-                <div class="nes-container is-dark with-title" key={index}>
+                < div class="nes-container is-dark with-title" key={index}>
                   <h1>{item.description}</h1>
-                  <img src={item.image_url} height="300" width="350" />
-                  <button
-                    class="nes-btn is-error"
-                    onClick={() => axios.delete(`/api/shelf/${item.id}`)}
-                  >
-                    Delete
-                  </button>
-                  <button
-                    class="nes-btn"
-                    onClick={editPage}
-                  >
-                    Edit
-                  </button>
+                  <img src={item.image_url} height="300" width="350"/>
+                  <br/>
+                  <div>
+                    <button
+                      class="nes-btn is-error"
+                      onClick={() => axios.delete(`/api/shelf/${item.id}`)}
+                    >
+                      Delete
+                    </button>
+                    <button class="nes-btn" onClick={editPage}>
+                      Edit
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
